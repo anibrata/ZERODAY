@@ -1,0 +1,555 @@
+Zeroday Attack Classification
+*****************************
+
+Run 1: Preliminary using Random Forest
+
+/home/anibrata/Anibrata/PROJECTS/CODE/main_env/bin/python3.10 /home/anibrata/Anibrata/PROJECTS/CODE/ZERO_DAY/binary/main.py RandomForest 
+Total memory usage:  11272.4921875 MB
+Total memory usage:  17854.24609375 MB
+(357786, 9418)
+Total memory usage:  26310.15234375 MB
+Training Dataset Shape:  (331642, 9418)
+Zero Dataset Shape:  (26678, 9418)
+**********************
+Type of Data in Label column:  category
+Unique values in Label column:  ['Riskware', 'Adware', 'Trojan', 'Benign', 'Ransomware', ..., 'Scareware', 'NoCategory', 'FileInfector', 'Backdoor', 'Banker']
+Length: 14
+Categories (15, object): ['Adware', 'Backdoor', 'Banker', 'Benign', ..., 'Scareware', 'Spy', 'Trojan',
+                          'Zeroday']
+F1          int16
+F2          int16
+F3          int16
+F4          int16
+F5           int8
+           ...   
+F9500     float32
+F9501     float32
+F9502     float32
+F9503     float32
+Label    category
+Length: 9418, dtype: object
+Type of Data in Label column:  int64
+0        -1
+1        -1
+2        -1
+3        -1
+4        -1
+         ..
+331637   -1
+331638    1
+331639    1
+331640    1
+331641   -1
+Name: Label, Length: 331642, dtype: int64
+Total number of records in RDF:  331642
+Total memory usage:  26412.22265625 MB
+         F1  F2  F3   F4  F5  F6  ...  F9498  F9499  F9500  F9501  F9502  F9503
+0       286   0   0    4  11   0  ...      0      0    0.0    0.0    0.0    0.0
+1        14   0   0    3   3   5  ...      0      0    0.0    0.0    0.0    0.0
+2       217   0   0   50   5   1  ...      0      0    0.0    0.0    0.0    0.0
+3       125   0   0   11   7   0  ...      0      0    0.0    0.0    0.0    0.0
+4       157   0   0    3  22   4  ...      0      0    0.0    0.0    0.0    0.0
+...     ...  ..  ..  ...  ..  ..  ...    ...    ...    ...    ...    ...    ...
+331637  127   0   0   50   1   0  ...      0      0    0.0    0.0    0.0    0.0
+331638    4   0   0  460   1   3  ...      0      0    0.0    0.0    0.0    0.0
+331639  219   0   0   16   1   8  ...      0      0    0.0    0.0    0.0    0.0
+331640   22   0   0    2   7   0  ...      0      0    0.0    0.0    0.0    0.0
+331641   84   0   0   15  22  13  ...      0      0    0.0    0.0    0.0    0.0
+
+[331642 rows x 9417 columns]
+0        -1
+1        -1
+2        -1
+3        -1
+4        -1
+         ..
+331637   -1
+331638    1
+331639    1
+331640    1
+331641   -1
+Name: Label, Length: 331642, dtype: int64
+Test/Before Oversampling
+Total memory usage:  26412.28125 MB
+    F1  F2  F3  F4  F5  F6  F7  ...  F9497  F9498  F9499  F9500  F9501  F9502  F9503
+0  286   0   0   4  11   0  10  ...      0      0      0    0.0    0.0    0.0    0.0
+1   14   0   0   3   3   5   0  ...      0      0      0    0.0    0.0    0.0    0.0
+2  217   0   0  50   5   1   4  ...      0      0      0    0.0    0.0    0.0    0.0
+3  125   0   0  11   7   0   1  ...      0      0      0    0.0    0.0    0.0    0.0
+4  157   0   0   3  22   4   0  ...      0      0      0    0.0    0.0    0.0    0.0
+
+[5 rows x 9417 columns] 0   -1
+1   -1
+2   -1
+3   -1
+4   -1
+Name: Label, dtype: int64
+**********************
+          F1  F2  F3   F4  F5  F6  ...  F9498  F9499  F9500  F9501  F9502  F9503
+0        286   0   0    4  11   0  ...      0      0    0.0    0.0    0.0    0.0
+1         14   0   0    3   3   5  ...      0      0    0.0    0.0    0.0    0.0
+2        217   0   0   50   5   1  ...      0      0    0.0    0.0    0.0    0.0
+3        125   0   0   11   7   0  ...      0      0    0.0    0.0    0.0    0.0
+4        157   0   0    3  22   4  ...      0      0    0.0    0.0    0.0    0.0
+...      ...  ..  ..  ...  ..  ..  ...    ...    ...    ...    ...    ...    ...
+362714   690   0   0   58   1   0  ...      0      0    0.0    0.0    0.0    0.0
+362715   318   0   0  100   4   7  ...      0      0    0.0    0.0    0.0    0.0
+362716   394   0   5  130   6   3  ...      0      0    0.0    0.0    0.0    0.0
+362717   272   0   0   45  23   2  ...      0      0    0.0    0.0    0.0    0.0
+362718  1330   4   0  136  98  12  ...      0      0    0.0    0.0    0.0    0.0
+
+[362719 rows x 9417 columns] 0        -1
+1        -1
+2        -1
+3        -1
+4        -1
+         ..
+362714    1
+362715    1
+362716    1
+362717    1
+362718    1
+Name: Label, Length: 362719, dtype: int64          F1  F2  F3  F4  F5  F6  ...  F9499  F9500  F9501  F9502  F9503    Label
+0       353   0   0   5   0   2  ...      0    0.0    0.0    0.0    0.0   Benign
+1        23   0   0  12   5   2  ...      0    0.0    0.0    0.0    0.0  Zeroday
+2      1084   0   0  52  11   5  ...      0    0.0    0.0    0.0    0.0  Zeroday
+3       132   1   0  48   4   1  ...      0    0.0    0.0    0.0    0.0   Benign
+4        13   0   0   4   0   0  ...      0    0.0    0.0    0.0    0.0   Benign
+...     ...  ..  ..  ..  ..  ..  ...    ...    ...    ...    ...    ...      ...
+26673    16   0   0   2   3   0  ...      0    0.0    0.0    0.0    0.0  Zeroday
+26674   476   0   0  55  22   1  ...      0    0.0    0.0    0.0    0.0   Benign
+26675     0   0   0   8   0   0  ...      0    0.0    0.0    0.0    0.0  Zeroday
+26676   212   0   0  28   5   1  ...      0    0.0    0.0    0.0    0.0  Zeroday
+26677    81   0   1  23  13  10  ...      0    0.0    0.0    0.0    0.0  Zeroday
+
+[26678 rows x 9418 columns]
+Average Accuracy: 0.987
+Average Standard Deviation: 0.000
+[[182232     39]
+ [   275 180173]]
+Confusion matrix, without normalization
+[[182232     39]
+ [   275 180173]]
+Normalized confusion matrix
+[[9.99786033e-01 2.13967115e-04]
+ [1.52398475e-03 9.98476015e-01]]
+Training Accuracy: 0.9991343160959311
+Training Precision: 0.9997835882183207
+Training Recall: 0.998476015250931
+Training F1-Score: 0.9991293739255809
+Training AUC-Score: 0.9991310240680153
+Training Time taken:  1131.7557394060132
+Total memory usage:  14046.26953125 MB
+Total memory usage:  14046.26953125 MB
+         F1  F2  F3  F4  F5  F6  ...  F9498  F9499  F9500  F9501  F9502  F9503
+0       353   0   0   5   0   2  ...      0      0    0.0    0.0    0.0    0.0
+1        23   0   0  12   5   2  ...      0      0    0.0    0.0    0.0    0.0
+2      1084   0   0  52  11   5  ...      0      0    0.0    0.0    0.0    0.0
+3       132   1   0  48   4   1  ...      0      0    0.0    0.0    0.0    0.0
+4        13   0   0   4   0   0  ...      0      0    0.0    0.0    0.0    0.0
+...     ...  ..  ..  ..  ..  ..  ...    ...    ...    ...    ...    ...    ...
+26673    16   0   0   2   3   0  ...      0      0    0.0    0.0    0.0    0.0
+26674   476   0   0  55  22   1  ...      0      0    0.0    0.0    0.0    0.0
+26675     0   0   0   8   0   0  ...      0      0    0.0    0.0    0.0    0.0
+26676   212   0   0  28   5   1  ...      0      0    0.0    0.0    0.0    0.0
+26677    81   0   1  23  13  10  ...      0      0    0.0    0.0    0.0    0.0
+
+[26678 rows x 9417 columns] 0        1
+1       -1
+2       -1
+3        1
+4        1
+        ..
+26673   -1
+26674    1
+26675   -1
+26676   -1
+26677   -1
+Name: Label, Length: 26678, dtype: int64
+[[12026  1313]
+ [  140 13199]]
+Confusion matrix, without normalization
+[[0.90156683 0.09843317]
+ [0.01049554 0.98950446]]
+Normalized confusion matrix
+[[12026  1313]
+ [  140 13199]]
+Test Accuracy: 0.9455356473498763
+Test Precision: 0.9095231532524807
+Test Recall: 0.9895044606042432
+Test F1-Score: 0.9478295213816379
+Test AUC-Score: 0.9455356473498764
+Test Time taken:  0.5236368179321289
+Process complete successfully!
+
+Process finished with exit code 0
+
+***************************************************************
+
+
+PCA Results
+-------------------------------------
+
+Performing PCA ...
+Number of components at the elbow point: 2426
+Number of components above the threshold: 258
+Number of components: 259
+PCA done ... 
+X_pca: [[ 1.0285914e+00  9.3461025e-01  2.1146297e-01 ... -9.7509604e-03
+   3.9865430e-03 -1.2638742e-02]
+ [-5.8454025e-01 -1.6745964e-01 -5.4537046e-01 ... -4.1281231e-02
+  -7.3792003e-02 -7.3316125e-03]
+ [ 1.7803884e+00 -2.0663947e-01 -5.4561216e-02 ... -9.0106769e-04
+  -4.4416031e-04  2.6523788e-03]
+ ...
+ [-1.8191676e-01 -3.3059633e-01 -4.3446779e-01 ...  6.8186313e-02
+   2.1456552e-03 -1.4372548e-02]
+ [-1.5661144e+00 -2.4904191e-01 -4.1911072e-01 ... -2.5525030e-02
+   1.0050931e-02  6.3118367e-03]
+ [-1.5661144e+00 -2.4904191e-01 -4.1911072e-01 ... -2.5525069e-02
+   1.0050709e-02  6.3118851e-03]]
+y_pca: [-1 -1 -1 ... -1 -1 -1]
+pal@trainingserver:~/PROJECTS/CODE/ZERO_DAY/binary$ 
+
+
+------------------------------------------------------
+
+PCA - Number of Features: 259 (Using the least of Elbow and Threshold)
+QBoost Lambda = 0.00375
+Training time :35.727245622780174
+              precision    recall  f1-score   support
+
+          -1       0.69      0.86      0.77     13339
+           1       0.81      0.62      0.70     13339
+
+    accuracy                           0.74     26678
+   macro avg       0.75      0.74      0.74     26678
+weighted avg       0.75      0.74      0.74     26678
+Prediction time :0.0015913140960037708
+[[11459  1880]
+ [ 5060  8279]]
+Test AUC-Score: 0.7398605592623135
+
+------------------------------------------------------
+
+Using all 9417 features killed the program as the data structure needed to train the QBoost was so large that even 64GB of server memory was not enough for it.
+
+1. Test with PCA < 259 - (25-50-75-100-125-150 ... )
+2. Test of a different dataset with lesser number of features - cybersecurity dataset.
+
+-----------------------------------------------------------
+
+1)
+PCA = 25
+Random Forest
+Training time :97.8615793469362
+              precision    recall  f1-score   support
+
+          -1       0.86      0.80      0.83     13339
+           1       0.81      0.87      0.84     13339
+
+    accuracy                           0.84     26678
+   macro avg       0.84      0.84      0.84     26678
+weighted avg       0.84      0.84      0.84     26678
+Prediction time :0.14090482704341412
+
+QBoost
+Training time :13.483107240870595
+              precision    recall  f1-score   support
+
+          -1       0.73      0.85      0.78     13339
+           1       0.82      0.68      0.74     13339
+
+    accuracy                           0.76     26678
+   macro avg       0.77      0.76      0.76     26678
+weighted avg       0.77      0.76      0.76     26678
+Prediction time :0.0018267887644469738
+-----------------------------------------------------------
+PCA = 50
+Random Forest
+Training time :151.1796405571513
+              precision    recall  f1-score   support
+
+          -1       0.85      0.78      0.81     13339
+           1       0.80      0.86      0.83     13339
+
+    accuracy                           0.82     26678
+   macro avg       0.82      0.82      0.82     26678
+weighted avg       0.82      0.82      0.82     26678
+Prediction time :0.16131382808089256
+
+QBoost
+Training time :16.869608369190246
+              precision    recall  f1-score   support
+
+          -1       0.73      0.85      0.78     13339
+           1       0.82      0.68      0.74     13339
+
+    accuracy                           0.76     26678
+   macro avg       0.77      0.76      0.76     26678
+weighted avg       0.77      0.76      0.76     26678
+Prediction time :0.001846873201429844
+-----------------------------------------------------------
+PCA = 75
+Random Forest
+Training time :172.05532096279785
+              precision    recall  f1-score   support
+
+          -1       0.87      0.79      0.83     13339
+           1       0.81      0.88      0.84     13339
+
+    accuracy                           0.84     26678
+   macro avg       0.84      0.84      0.84     26678
+weighted avg       0.84      0.84      0.84     26678
+Prediction time :0.1661467459052801
+
+QBoost
+Training time :19.09018877800554
+              precision    recall  f1-score   support
+
+          -1       0.72      0.85      0.78     13339
+           1       0.82      0.68      0.74     13339
+
+    accuracy                           0.76     26678
+   macro avg       0.77      0.76      0.76     26678
+weighted avg       0.77      0.76      0.76     26678
+Prediction time :0.002258273772895336
+-----------------------------------------------------------
+PCA = 100
+Random Forest
+Training time :221.29884974798188
+              precision    recall  f1-score   support
+
+          -1       0.88      0.77      0.82     13339
+           1       0.80      0.89      0.84     13339
+
+    accuracy                           0.83     26678
+   macro avg       0.84      0.83      0.83     26678
+weighted avg       0.84      0.83      0.83     26678
+Prediction time :0.1734034940600395
+
+QBoost
+Training time :21.299745158758014
+              precision    recall  f1-score   support
+
+          -1       0.73      0.85      0.78     13339
+           1       0.82      0.68      0.74     13339
+
+    accuracy                           0.76     26678
+   macro avg       0.77      0.76      0.76     26678
+weighted avg       0.77      0.76      0.76     26678
+Prediction time :0.0018482082523405552
+-----------------------------------------------------------
+PCA = 125
+Random Forest
+Training time :245.82672326173633
+              precision    recall  f1-score   support
+
+          -1       0.89      0.76      0.82     13339
+           1       0.79      0.91      0.85     13339
+
+    accuracy                           0.83     26678
+   macro avg       0.84      0.83      0.83     26678
+weighted avg       0.84      0.83      0.83     26678
+Prediction time :0.1800392186269164
+
+QBoost
+Training time :24.124076976906508
+              precision    recall  f1-score   support
+
+          -1       0.72      0.85      0.78     13339
+           1       0.81      0.67      0.74     13339
+
+    accuracy                           0.76     26678
+   macro avg       0.77      0.76      0.76     26678
+weighted avg       0.77      0.76      0.76     26678
+Prediction time :0.0018346779979765415
+-----------------------------------------------------------
+PCA = 150
+Random Forest
+Training time :268.0079747871496
+              precision    recall  f1-score   support
+
+          -1       0.88      0.76      0.82     13339
+           1       0.79      0.90      0.84     13339
+
+    accuracy                           0.83     26678
+   macro avg       0.84      0.83      0.83     26678
+weighted avg       0.84      0.83      0.83     26678
+Prediction time :0.18327878089621663
+
+QBoost
+Training time :26.202510186936706
+              precision    recall  f1-score   support
+
+          -1       0.72      0.85      0.78     13339
+           1       0.82      0.68      0.74     13339
+
+    accuracy                           0.76     26678
+   macro avg       0.77      0.76      0.76     26678
+weighted avg       0.77      0.76      0.76     26678
+Prediction time :0.001973559148609638
+-----------------------------------------------------------
+PCA = 175
+Random Forest
+Training time :289.21910547139123
+              precision    recall  f1-score   support
+
+          -1       0.88      0.75      0.81     13339
+           1       0.78      0.90      0.84     13339
+
+    accuracy                           0.83     26678
+   macro avg       0.83      0.83      0.82     26678
+weighted avg       0.83      0.83      0.82     26678
+Prediction time :0.1989926639944315
+
+QBoost
+Training time :29.147665071766824
+              precision    recall  f1-score   support
+
+          -1       0.72      0.85      0.78     13339
+           1       0.81      0.67      0.74     13339
+
+    accuracy                           0.76     26678
+   macro avg       0.77      0.76      0.76     26678
+weighted avg       0.77      0.76      0.76     26678
+Prediction time :0.0018679643981158733
+-----------------------------------------------------------
+PCA = 200
+Random Forest
+Training time :304.4531390010379
+              precision    recall  f1-score   support
+
+          -1       0.89      0.73      0.80     13339
+           1       0.77      0.91      0.84     13339
+
+    accuracy                           0.82     26678
+   macro avg       0.83      0.82      0.82     26678
+weighted avg       0.83      0.82      0.82     26678
+Prediction time :0.2086341488175094
+
+QBoost
+Training time :31.626383529044688
+              precision    recall  f1-score   support
+
+          -1       0.72      0.85      0.78     13339
+           1       0.81      0.68      0.74     13339
+
+    accuracy                           0.76     26678
+   macro avg       0.77      0.76      0.76     26678
+weighted avg       0.77      0.76      0.76     26678
+Prediction time :0.0026168469339609146
+-----------------------------------------------------------
+PCA = 225
+Random Forest
+Training time :328.16889242082834
+              precision    recall  f1-score   support
+
+          -1       0.89      0.73      0.80     13339
+           1       0.77      0.91      0.83     13339
+
+    accuracy                           0.82     26678
+   macro avg       0.83      0.82      0.82     26678
+weighted avg       0.83      0.82      0.82     26678
+Prediction time :0.23472923319786787
+
+QBoost
+Training time :34.15949953533709
+              precision    recall  f1-score   support
+
+          -1       0.72      0.85      0.78     13339
+           1       0.82      0.68      0.74     13339
+
+    accuracy                           0.76     26678
+   macro avg       0.77      0.76      0.76     26678
+weighted avg       0.77      0.76      0.76     26678
+Prediction time :0.0019190702587366104
+******************************************************
+PCA = 259(PCA: Threshold)
+Random Forest
+Training time :350.6722779329866
+              precision    recall  f1-score   support
+
+          -1       0.89      0.72      0.80     13339
+           1       0.76      0.91      0.83     13339
+
+    accuracy                           0.82     26678
+   macro avg       0.83      0.82      0.81     26678
+weighted avg       0.83      0.82      0.81     26678
+Prediction time :0.25841490272432566
+
+QBoost
+Training time :38.65385850286111
+              precision    recall  f1-score   support
+
+          -1       0.72      0.85      0.78     13339
+           1       0.81      0.67      0.74     13339
+
+    accuracy                           0.76     26678
+   macro avg       0.77      0.76      0.76     26678
+weighted avg       0.77      0.76      0.76     26678
+Prediction time :0.0017726458609104156
+
+******************************************************
+RF Training time :97.8615793469362
+RF Training time :151.1796405571513
+RF Training time :172.05532096279785
+RF Training time :221.29884974798188
+RF Training time :245.82672326173633
+RF Training time :268.0079747871496
+RF Training time :289.21910547139123
+RF Training time :304.4531390010379
+RF Training time :328.16889242082834
+RF Training time :350.6722779329866
+
+QB Training time :13.483107240870595
+QB Training time :16.869608369190246
+QB Training time :19.09018877800554
+QB Training time :21.299745158758014
+QB Training time :24.124076976906508
+QB Training time :26.202510186936706
+QB Training time :29.147665071766824
+QB Training time :31.626383529044688
+QB Training time :34.15949953533709
+QB Training time :38.65385850286111
+
+******************************************************
+RF Prediction time :0.14090482704341412
+RF Prediction time :0.16131382808089256
+RF Prediction time :0.1661467459052801
+RF Prediction time :0.1734034940600395
+RF Prediction time :0.1800392186269164
+RF Prediction time :0.18327878089621663
+RF Prediction time :0.1989926639944315
+RF Prediction time :0.2086341488175094
+RF Prediction time :0.23472923319786787
+RF Prediction time :0.25841490272432566
+
+QB Prediction time :0.0018267887644469738
+QB Prediction time :0.001846873201429844
+QB Prediction time :0.002258273772895336
+QB Prediction time :0.0018482082523405552
+QB Prediction time :0.0018346779979765415
+QB Prediction time :0.001973559148609638
+QB Prediction time :0.0018679643981158733
+QB Prediction time :0.0026168469339609146
+QB Prediction time :0.0019190702587366104
+QB Prediction time :0.0017726458609104156
+******************************************************
+
+PCA     QB accuracy  RF Accuracy    QB Precision    RF Accuracy     QB Recall  RF Recall    QB F1-score     RF F1-Score     QB AUC      RF AUC 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+25          0.76        0.84            0.77            0.84            0.76       0.84        0.76             0.84        0.758602    0.815128
+50          0.76        0.82            0.77            0.82            0.76       0.82        0.76             0.82        0.763925    0.836681
+75          0.76        0.84            0.77            0.84            0.76       0.84        0.76             0.84        0.764187    0.821500
+100         0.76        0.83            0.77            0.84            0.76       0.83        0.76             0.83        0.761638    0.836569
+125         0.76        0.83            0.77            0.84            0.76       0.83        0.76             0.83        0.764037    0.831209
+150         0.76        0.83            0.77            0.84            0.76       0.83        0.76             0.83        0.759652    0.834170
+175         0.76        0.83            0.77            0.83            0.76       0.83        0.76             0.82        0.762163    0.829110
+200         0.76        0.82            0.77            0.83            0.76       0.82        0.76             0.82        0.760251    0.825099
+225         0.76        0.82            0.77            0.83            0.76       0.82        0.76             0.82        0.761301    0.822025
+259         0.76        0.82            0.77            0.83            0.76       0.82        0.76             0.81        0.761263    0.819439 
+
+******************************************************
+
+

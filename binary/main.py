@@ -57,6 +57,7 @@ def reportResult(y, predictions, model, train_time, predict_time):
 
 
 def train_classify_RF(X, y, cond_cv):
+    print("Inside train_classify_RF()")
     # Train and validate the dataset using a 5-fold cross validation
 
     # Create a Random Forest classifier with 50 decision trees (as per Sarhan et al. 2023)
@@ -99,36 +100,36 @@ def train_classify_RF(X, y, cond_cv):
     cm = metrics.confusion_matrix(y, y_train_pred)
     print(cm)
     # Plot confusion matrix using seaborn
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=np.unique(y), yticklabels=np.unique(y))
-    plt.title('Confusion Matrix')
-    plt.xlabel('Predicted')
-    plt.ylabel('True')
-    plt.show()
-
-    # plt.show()
-    plt.savefig('../results/conf_train_matrix.png')
-
-    # Plot the confusion matrix
-    """metrics.plot_confusion_matrix(rf_classifier, X, y, cmap='Blues')
-    plt.savefig('../results/conf_train_matrix.png')"""
-
-    # Plot the ROC curve
-    """metrics.plot_roc_curve(rf_classifier, X, y)
-    plt.savefig('../results/roc_train_curve.png')"""
-
-    RocCurveDisplay.from_predictions(y, y_train_pred)
-    # plt.show()
-    plt.savefig('../results/roc_train_curve.png')
+    # sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=np.unique(y), yticklabels=np.unique(y))
+    # plt.title('Confusion Matrix')
+    # plt.xlabel('Predicted')
+    # plt.ylabel('True')
+    # # plt.show()
+    #
+    # # plt.show()
+    # plt.savefig('../results/conf_train_matrix.png')
+    #
+    # # Plot the confusion matrix
+    # """metrics.plot_confusion_matrix(rf_classifier, X, y, cmap='Blues')
+    # plt.savefig('../results/conf_train_matrix.png')"""
+    #
+    # # Plot the ROC curve
+    # """metrics.plot_roc_curve(rf_classifier, X, y)
+    # plt.savefig('../results/roc_train_curve.png')"""
+    #
+    # RocCurveDisplay.from_predictions(y, y_train_pred)
+    # # plt.show()
+    # plt.savefig('../results/roc_train_curve.png')
 
     # Plot the precision-recall curve
     """metrics.plot_precision_recall_curve(rf_classifier, X, y)
     plt.savefig('../results/prc_train_curve.png')"""
 
-    display = PrecisionRecallDisplay.from_predictions(
-        y, y_train_pred, name="RF-gini", plot_chance_level=True
-    )
-    _ = display.ax_.set_title("2-class Precision-Recall curve")
-    plt.savefig('../results/prc_train_curve.png')
+    # display = PrecisionRecallDisplay.from_predictions(
+    #     y, y_train_pred, name="RF-gini", plot_chance_level=True
+    # )
+    # _ = display.ax_.set_title("2-class Precision-Recall curve")
+    # plt.savefig('../results/prc_train_curve.png')
 
     # Calculate the Accuracy, Precision, Recall, F1-Score, and AUC
     auc_score = roc_auc_score(y, y_train_pred)
@@ -139,7 +140,7 @@ def train_classify_RF(X, y, cond_cv):
 
 # Test the model on the test dataset (Zero day dataset)
 def test_classify_RF(model, X, y):
-
+    print("Inside test_classify_RF()")
     # Start the timer
     start_time = timer()
     # Make predictions on the test dataset
@@ -153,25 +154,25 @@ def test_classify_RF(model, X, y):
     cm = metrics.confusion_matrix(y, y_test_pred)
     print(cm)
     # Plot confusion matrix using seaborn
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=np.unique(y), yticklabels=np.unique(y))
-    plt.title('Confusion Matrix')
-    plt.xlabel('Predicted')
-    plt.ylabel('True')
-    plt.show()
-
-    # plt.show()
-    plt.savefig('../results/conf_test_matrix_rf.png')
-
-    # Plot the ROC curve
-    RocCurveDisplay.from_predictions(y, y_test_pred)
-    plt.savefig('../results/roc_test_curve_rf.png')
-
-    # Plot the precision-recall curve
-    display = PrecisionRecallDisplay.from_predictions(
-        y, y_test_pred, name="RF-gini", plot_chance_level=True
-    )
-    _ = display.ax_.set_title("2-class Precision-Recall curve")
-    plt.savefig('../results/prc_test_curve_rf.png')
+    # sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=np.unique(y), yticklabels=np.unique(y))
+    # plt.title('Confusion Matrix')
+    # plt.xlabel('Predicted')
+    # plt.ylabel('True')
+    # # plt.show()
+    #
+    # # plt.show()
+    # plt.savefig('../results/conf_test_matrix_rf.png')
+    #
+    # # Plot the ROC curve
+    # RocCurveDisplay.from_predictions(y, y_test_pred)
+    # plt.savefig('../results/roc_test_curve_rf.png')
+    #
+    # # Plot the precision-recall curve
+    # display = PrecisionRecallDisplay.from_predictions(
+    #     y, y_test_pred, name="RF-gini", plot_chance_level=True
+    # )
+    # _ = display.ax_.set_title("2-class Precision-Recall curve")
+    # plt.savefig('../results/prc_test_curve_rf.png')
 
     # Calculate the Accuracy, Precision, Recall, F1-Score, and AUC
     auc_score = roc_auc_score(y, y_test_pred)
@@ -192,6 +193,7 @@ def test_classify_RF(model, X, y):
 
 
 def train_classify_Qboost(X, y, cv):
+    print('Inside train_classify_Qboost()')
     """ Evaluate the QBoost model for the value of lambda to be used """
     n_features = np.size(X, 1)
     print('Number of features:', n_features)
@@ -230,7 +232,12 @@ def train_classify_Qboost(X, y, cv):
 
 
 def test_classify_Qboost(model, X, y):
+    print('Inside test_classify_Qboost()')
     print('Number of test samples:', len(X))
+
+    dir = 'PCA-num'
+    if not os.path.exists(dir):
+        os.makedirs(dir)
 
     """ Predict with Qboost and evaluate the model """
     """ Start timer for QBoost prediction """
@@ -253,25 +260,28 @@ def test_classify_Qboost(model, X, y):
     cm = metrics.confusion_matrix(y, y_pred)
     print(cm)
     # Plot confusion matrix using seaborn
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=np.unique(y), yticklabels=np.unique(y))
-    plt.title('Confusion Matrix')
-    plt.xlabel('Predicted')
-    plt.ylabel('True')
-    plt.show()
-
-    # plt.show()
-    plt.savefig('../results/conf_test_matrix_QB.png')
-
-    # Plot the ROC curve
-    RocCurveDisplay.from_predictions(y, y_pred)
-    plt.savefig('../results/roc_test_curve_QB.png')
-
-    # Plot the precision-recall curve
-    display = PrecisionRecallDisplay.from_predictions(
-        y, y_pred, name="QBoost", plot_chance_level=True
-    )
-    _ = display.ax_.set_title("2-class Precision-Recall curve")
-    plt.savefig('../results/prc_test_curve_QB.png')
+    # sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=np.unique(y), yticklabels=np.unique(y))
+    # plt.title('Confusion Matrix')
+    # plt.xlabel('Predicted')
+    # plt.ylabel('True')
+    # # plt.show()
+    #
+    # # Dynamically include the new directory "dir" in the path while saving a file
+    # plt.savefig(f'../results/{dir}/conf_test_matrix_QB.png')
+    #
+    # # plt.show()
+    # # plt.savefig('../results/conf_test_matrix_QB.png')
+    #
+    # # Plot the ROC curve
+    # RocCurveDisplay.from_predictions(y, y_pred)
+    # plt.savefig('../results/roc_test_curve_QB.png')
+    #
+    # # Plot the precision-recall curve
+    # display = PrecisionRecallDisplay.from_predictions(
+    #     y, y_pred, name="QBoost", plot_chance_level=True
+    # )
+    # _ = display.ax_.set_title("2-class Precision-Recall curve")
+    # plt.savefig('../results/prc_test_curve_QB.png')
 
     # Calculate the Accuracy, Precision, Recall, F1-Score, and AUC
     auc_score = roc_auc_score(y, y_pred)
@@ -350,30 +360,32 @@ def train_test_qboost(X, y, xtest, ytest, lam):
 # Define the main function
 def main():
     # Save the original stdout and stderr
-    original_stdout = sys.stdout
-    original_stderr = sys.stderr
+    #original_stdout = sys.stdout
+    #original_stderr = sys.stderr
 
     # Specify the log file
-    log_file_path = 'output.log'
+    #log_file_path = 'output.log'
 
-    # Open the log file in write mode
-    log_file = open(log_file_path, 'w')
+    # If the file exists zero the contents and Open the log file in write mode
+    #log_file = open(log_file_path, 'w')
 
     # Redirect stdout and stderr to the log file
-    sys.stdout = log_file
-    sys.stderr = log_file
+    #sys.stdout = log_file
+    #sys.stderr = log_file
 
     # Capture the first argument
-    args = sys.argv[1:]
+    #args = sys.argv[1:]
 
     # Create a list variable to number of features to be used
-    num = [25, 50, 75, 100, 125, 150, 175, 200, 225]
+    # num = [25, 50, 75, 100, 125, 150, 175, 200, 225]
+    num = [175]
+    # print("Number of Features: ", num)
 
     # Check the logic here: it seems that the number of features is not matching the pca boolean variables in the
     # create_data function ***
 
     for val in num:
-        print("f{Number of Features: " + str(val))
+        print("Number of Features: " + str(val))
 
         # Call the function
         X_train, y_train, X_test, y_test = create_data("zero", val, pca_analysis=False, pca_hardcode=True)
@@ -393,7 +405,7 @@ def main():
         # Train and test QBoost
         print("Qboost")
         # Call the train_classify to train and validate model
-        model, train_time = train_classify_Qboost(X_train, y_train, True)
+        model, train_time = train_classify_Qboost(X_train, y_train, False)  # use False to run without cv (harcoded cv value)
         # Show total memory usage
         print("Total memory usage: ", psutil.virtual_memory().used / (1024 ** 2), "MB")
         # Call the test_classify function
@@ -409,7 +421,7 @@ def main():
         print("Random Forest")
         # Train and test Random Forest
         # Call the train_and_validate function
-        model, train_time = train_classify_RF(X_train, y_train, True)
+        model, train_time = train_classify_RF(X_train, y_train, True)  # use False to run without cv
         # Show total memory usage
         print("Total memory usage: ", psutil.virtual_memory().used / (1024 ** 2), "MB")
         # Call the test_model function
@@ -417,9 +429,10 @@ def main():
         # Create Results File
         reportResult(y_test, y_test_pred, "rf", train_time, pred_time)
 
-        print("Done with PCA components: ", num)
+        print("**************************************************************")
 
-        exit(0)
+        # exit(0)
+        # break
 
     """ 
     Program stops with error:
@@ -431,9 +444,9 @@ def main():
     print("Done")
 
     # Close the log file and restore original stdout and stderr
-    log_file.close()
-    sys.stdout = original_stdout
-    sys.stderr = original_stderr
+    #log_file.close()
+    #sys.stdout = original_stdout
+    #sys.stderr = original_stderr
 
 
 # Call main function

@@ -19,6 +19,8 @@ from sklearn.metrics import accuracy_score
 
 import dimod
 from dwave.system import LeapHybridSampler
+from dimod.generators import and_gate
+from dwave.system import DWaveSampler, EmbeddingComposite, LazyFixedEmbeddingComposite
 
 from tabulate import tabulate
 
@@ -229,8 +231,13 @@ def _minimize_squared_loss_binary(H, y, lam):
     """Minimize squared loss using binary weight variables."""
     bqm = _build_bqm(H, y, lam)
 
-    sampler = LeapHybridSampler()
-    results = sampler.sample(bqm, label='Example - QBoost')
+    # CHANGED THE BELOW-MENTIONED LINES TO USE THE DIRECT QPUs
+    # Comment the LeapHybridSampler and user EmbeddingComposite and LazyFixedEmbeddingComposite
+    # sampler = LeapHybridSampler()
+    # sampler = EmbeddingComposite(DWaveSampler())
+    sampler = LazyFixedEmbeddingComposite(DWaveSampler())
+    # print(sampler.properties)
+    results = sampler.sample(bqm, label='QBoost-Zero-Day')
     weights = np.array(list(results.first.sample.values()))
     energy = results.first.energy
 

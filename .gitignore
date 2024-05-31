@@ -2,3 +2,4 @@ data/
 __pycache__
 binary.zip
 binary/model.pkl
+.idea/

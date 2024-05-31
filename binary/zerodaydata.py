@@ -30,6 +30,7 @@ def read_parquet(path):
 
 
 def create_zero_main(df):
+    print("Inside create_zero_main()")
     print(df.shape)
     # Select all rows where labels are like "Zero"
     zero_rows = df[df['Label'].str.startswith('Zero')]
@@ -243,7 +244,7 @@ def balance_dataset_specific(X, y):
     # Show total memory usage
     # print("Total memory usage: ", psutil.virtual_memory().used / (1024 ** 2), "MB")
 
-    # print("Comment oversampling to reduce the proicessing time in order to check "
+    # print("Comment oversampling to reduce the processing time in order to check "
     #      "an issue with the QBoost lam parameter which is showing different results"
     #      " with different values. Also commented the delete dataframe block and "
     #      "changed the return dataframes.")
@@ -265,6 +266,7 @@ def normalizeData(df):
 
 
 def create_data(val, num, pca_analysis, pca_hardcode):
+    print("Inside create_data()")
     # Set n_components to 0
     n_components = 0
     # Show total memory usage
@@ -299,6 +301,7 @@ def create_data(val, num, pca_analysis, pca_hardcode):
         gc.collect()
     elif pca_hardcode:
         n_components = num
+        print("PCA with: ", n_components)
     else:
         print("Skipping PCA")
 
@@ -372,6 +375,10 @@ def create_data(val, num, pca_analysis, pca_hardcode):
         # where Zeroday and Trojan are used combined as zero day.
         # X, y = balance_dataset_specific(cdf)
         return [], [], [], []
+
+    del X_train, X_test
+    sleep(5)
+    gc.collect()
 
     return X_train_pca, y_train, X_test_pca, y_test
 
